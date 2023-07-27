@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id "io.qameta.allure" version "2.11.2"
+    id "io.freefair.lombok" version "6.6.1"
+}
+
+apply plugin: 'maven-publish'
+
+group 'qa.guru.allure'
+version '2.4-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+def selenideVersion = "6.10.3",
+    junitVersion = "5.9.1",
+    javaFakerVersion = "1.0.2",
+    ownerVersion = "1.0.12",
+    slf4jVersion = "2.0.6",
+    allureVersion = "2.19.0",
+    restAssuredVersion = "5.3.0",
+    assertjVersion = "3.23.1",
+    jacksonVersion = "2.14.0"
+
+
+
+dependencies {
+    implementation 'org.projectlombok:lombok:1.18.22'
+    testImplementation(
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "com.github.javafaker:javafaker:$javaFakerVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion",
+            "com.codeborne:selenide:$selenideVersion",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion",
+            "io.qameta.allure:allure-selenide:$allureVersion",
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.qameta.allure:allure-rest-assured:$allureVersion",
+            "org.assertj:assertj-core:$assertjVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
+    )
+}
+
+allure {
+    version.set("2.19.0") //версия Allure Report (https://github.com/allure-framework/allure2)
+    adapter {
+        allureJavaVersion.set("2.19.0")
+
+        autoconfigureListeners.set(true)
+        aspectjWeaver.set(true) // обработка аннотации @Step
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
