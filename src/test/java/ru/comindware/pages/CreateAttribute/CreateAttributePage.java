@@ -209,4 +209,9 @@ public    class CreateAttributePage {
         $(getLocator("AreaFormConstructorPage.buttonSaveAttributeInPopUpLocator")).shouldBe(Condition.visible).click();
         $(getLocator("AreaFormConstructorPage.buttonSaveAttributeInPopUpLocator")).shouldNot(Condition.visible, Duration.ofSeconds(15));
     }
+
+    @Step("Создание атрибута типа запись.")
+    public void attemptCreateAttributeLink(String variableNameTypeAttribute) throws Exception {
+        $(getLocator("AreaFormConstructorPage.attributesNameLocator")).shouldBe(Condition.visible).hover();
+    }
 }

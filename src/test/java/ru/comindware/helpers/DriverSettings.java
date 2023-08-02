@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.comindware.config.App;
 
+import static com.codeborne.selenide.Selenide.open;
+
 
 public class DriverSettings {
     public static void configure() {
@@ -15,7 +17,7 @@ public class DriverSettings {
         RestAssured.baseURI = App.config.baseUrl();
         Configuration.baseUrl = App.config.baseUrl();
         Configuration.timeout = 60000;
-//        open(Configuration.baseUrl);
+        open(Configuration.baseUrl);
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();

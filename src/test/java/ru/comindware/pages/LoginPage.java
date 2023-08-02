@@ -18,7 +18,7 @@ public class LoginPage {
 
     @Step("Логинимся под {username} с паролем {pass}")
     public LoginPage login(String username, String pass) {
-        open("");
+        open("https://test.qa.comindware.net/#solutions");
         login.shouldBe(visible, Duration.ofSeconds(30));
         login.setValue(username);
         password.setValue(pass);

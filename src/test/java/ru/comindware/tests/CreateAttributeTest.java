@@ -8,7 +8,7 @@ import ru.comindware.config.CredentialsConfig;
 import ru.comindware.pages.CreateAttribute.CreateAttributePage;
 import ru.comindware.pages.LoginPage;
 
-public class CreateAttribute extends BaseTest {
+public class CreateAttributeTest extends BaseTest {
 
 
         LoginPage loginPage = new LoginPage();

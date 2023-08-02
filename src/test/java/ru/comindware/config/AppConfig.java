@@ -4,13 +4,13 @@ import org.aeonbits.owner.Config;
 
 @Config.Sources("classpath:config/app.properties")
 public interface AppConfig extends Config{
-    @DefaultValue("http://192.168.1.33")
+    @DefaultValue("https://test.qa.comindware.net")
     String apiUrl();
-    @DefaultValue("http://192.168.1.33/#RecordType/oa.169/Forms/form.11373")
+    @DefaultValue("https://test.qa.comindware.net/#solutions")
     String baseUrl();
     @DefaultValue("chrome")
     String browser();
-    @DefaultValue("110.0")
+    @DefaultValue("115.0")
     String browserVersion();
     @DefaultValue("1920x1080")
     String browserSize();
