@@ -7,6 +7,8 @@ import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import ru.comindware.API.ObjectService;
+import ru.comindware.API.Solution;
 import ru.comindware.config.CredentialsConfig;
 import ru.comindware.pages.CreateAttribute.CreateAttrubutes;
 import ru.comindware.pages.LoginPage;
@@ -14,6 +16,7 @@ import ru.comindware.pages.LoginPage;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -30,52 +33,34 @@ public class TextAttrTest {
     LoginPage loginPage = new LoginPage();
     CreateAttrubutes createAttrubutes = new CreateAttrubutes();
     CredentialsConfig config = ConfigFactory.create(CredentialsConfig.class, System.getProperties());
+    Solution solution = new Solution();
     String loginProject = config.loginProject(),
             passwordProject = config.passwordProject(),
-            nameBP = getRandomString(10),
-            nameShz1 = getRandomString(10),
-            nameShz2 = getRandomString(10),
-            nameText = getRandomString(10),
-            nameBool = getRandomString(10),
-            nameDate = getRandomString(10),
-            nameDuration = getRandomString(10),
-            nameNumber = getRandomString(10),
-            nameAccount = getRandomString(10),
-            nameDoc = getRandomString(10),
-            namePicture = getRandomString(10),
-            nameLink = getRandomString(10),
-            nameRole = getRandomString(10),
-            nameEnum = getRandomString(10),
-            nameOrg = getRandomString(10),
-            nameGiperlink = getRandomString(10),
-            nameQR = getRandomString(10),
-            nameShp = getRandomString(10),
+            nameBP = getRandomString(5),
+            nameShz1 = getRandomString(5),
+            nameShz2 = getRandomString(5),
+            nameText = getRandomString(5),
+            nameBool = getRandomString(5),
+            nameDate = getRandomString(5),
+            nameDuration = getRandomString(5),
+            nameNumber = getRandomString(5),
+            nameAccount = getRandomString(5),
+            nameDoc = getRandomString(5),
+            namePicture = getRandomString(5),
+            nameLink = getRandomString(5),
+            nameRole = getRandomString(5),
+            nameEnum = getRandomString(5),
+            nameOrg = getRandomString(5),
+            nameGiperlink = getRandomString(5),
+            nameQR = getRandomString(5),
+            nameShp = getRandomString(5),
             codeProject = String.valueOf(getRandomInt(0, 999999)),
             processAppId = "pa.1",
             projectDocumentAlias = "ProjectDocument",
             projectAlias = "Project";
-    private List<String> typesAttrs;
+            List<String> nameAttr = Arrays.asList(nameText,nameBool,nameDate,nameDuration,nameNumber,nameAccount,nameDoc,namePicture,nameLink,nameRole,nameEnum,nameOrg,nameGiperlink,nameQR);
 
-    public class TypeOfAttribute {
-        public static void main(String[] args){
-            ArrayList<String> typesAttrs = new ArrayList<String>();
-            typesAttrs.add(0,"Текст");
-            typesAttrs.add(1,"Логический");
-            typesAttrs.add(2,"Дата и время");
-            typesAttrs.add(3,"Длительность");
-            typesAttrs.add(4,"Число");
-            typesAttrs.add(5,"Аккаунт");
-            typesAttrs.add(6,"Документ");
-            typesAttrs.add(7,"Изображение");
-            typesAttrs.add(8,"Запись");
-            typesAttrs.add(9,"Роль");
-            typesAttrs.add(10,"Список значений");
-            typesAttrs.add(11,"Организационная единица");
-            typesAttrs.add(12,"Гиперссылка");
-            typesAttrs.add(13,"Штрихкод");
-        }
-    }
-    int i;
+
 
     @Test
     @Tag("Regress")
@@ -86,12 +71,9 @@ public class TextAttrTest {
         createAttrubutes.CreateBP()
                 .WriteDescriptionAndCreateBP(nameBP)
                 .CreateRecordTemplate2(nameShz2)
-                .CreateRecordTemplate1(nameShz1);
-        for (i=0; i<=typesAttrs.size(); i++){
-            if ((i != 7) || (i!=8) || (i!=12)){
-                createAttrubutes.CreateAttr();
-            }
-        }
+                .CreateRecordTemplate1(nameShz1)
+                .CreateAttr(nameAttr,nameShz2);
+        solution.DeleteByAlias(loginProject, passwordProject, nameBP);
     }
 
 }

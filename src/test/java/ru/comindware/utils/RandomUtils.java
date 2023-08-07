@@ -13,7 +13,7 @@ public class RandomUtils {
                 result.append(SALTCHARS.charAt(index));
             }
 
-            return result.toString();
+            return ("AQA" + result).toString();
         }
 
         public static int getRandomInt(int min, int max) {
